@@ -7,28 +7,25 @@
  */
 
 plugins {
-    // Apply the java plugin to add support for Java
-    id 'java'
-
-    // Apply the application plugin to add support for building a CLI application
-    id 'application'
+  id 'java'
+  id "com.gradle.build-scan" version "2.4"
+  id "org.springframework.boot" version "2.1.7.RELEASE"
+  id "io.spring.dependency-management" version "1.0.8.RELEASE"
 }
 
 repositories {
-    // Use jcenter for resolving dependencies.
-    // You can declare any Maven/Ivy/file repository here.
-    jcenter()
+  // Use jcenter for resolving dependencies.
+  // You can declare any Maven/Ivy/file repository here.
+  jcenter()
 }
 
 dependencies {
-    // This dependency is used by the application.
-    implementation 'com.google.guava:guava:27.1-jre'
+  implementation 'org.springframework.boot:spring-boot-dependencies:2.1.7.RELEASE'
+  implementation 'org.springframework.boot:spring-boot-starter-web'
 
-    // Use JUnit test framework
-    testImplementation 'junit:junit:4.12'
+  testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
-application {
-    // Define the main class for the application
-    mainClassName = 'plantuml.viewer.App'
+bootJar {
+  mainClassName = 'jp.gr.java_conf.saka.plantuml.viewer.App'
 }
