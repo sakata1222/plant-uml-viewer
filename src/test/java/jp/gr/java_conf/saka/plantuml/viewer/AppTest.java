@@ -3,15 +3,19 @@
  */
 package jp.gr.java_conf.saka.plantuml.viewer;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.hamcrest.CoreMatchers.containsString;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.common.collect.ImmutableMap;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -24,9 +28,17 @@ public class AppTest {
   private MockMvc mvc;
 
   @Test
-  public void helloGradle() throws Exception {
-    mvc.perform(get("/"))
+  public void svgGenerate() throws Exception {
+    ObjectMapper mapper = new ObjectMapper();
+    mvc
+      .perform(
+        post("/svg/generate")
+          .contentType(MediaType.APPLICATION_JSON)
+          .content(mapper.writeValueAsString(
+            ImmutableMap.of(
+              "plantUml", "@startuml\r\n@enduml"
+            ))))
       .andExpect(status().isOk())
-      .andExpect(content().string("Hello Gradle!"));
+      .andExpect(content().string(containsString("svg")));
   }
 }

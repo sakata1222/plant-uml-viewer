@@ -18,10 +18,27 @@ repositories {
   // You can declare any Maven/Ivy/file repository here.
   jcenter()
 }
-
+ext {
+  lombokVersion = '1.18.8'
+}
 dependencies {
   implementation 'org.springframework.boot:spring-boot-dependencies:2.1.7.RELEASE'
   implementation 'org.springframework.boot:spring-boot-starter-web'
+  // https://mvnrepository.com/artifact/net.sourceforge.plantuml/plantuml
+  implementation group: 'net.sourceforge.plantuml', name: 'plantuml', version: '8059'
+  // https://mvnrepository.com/artifact/commons-io/commons-io
+  implementation group: 'commons-io', name: 'commons-io', version: '2.6'
+  // https://mvnrepository.com/artifact/org.slf4j/slf4j-api
+  implementation group: 'org.slf4j', name: 'slf4j-api', version: '1.7.27'
+  // https://mvnrepository.com/artifact/ch.qos.logback/logback-classic
+  implementation group: 'ch.qos.logback', name: 'logback-classic', version: '1.2.3'
+  // https://mvnrepository.com/artifact/com.google.guava/guava
+  implementation group: 'com.google.guava', name: 'guava', version: '28.0-jre'
+
+
+  // https://mvnrepository.com/artifact/org.projectlombok/lombok
+  compileOnly group: 'org.projectlombok', name: 'lombok', version: lombokVersion
+  annotationProcessor group: 'org.projectlombok', name: 'lombok', version: lombokVersion
 
   testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
