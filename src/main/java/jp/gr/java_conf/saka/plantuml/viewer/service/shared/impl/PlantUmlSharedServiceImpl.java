@@ -5,7 +5,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.lang.invoke.MethodHandles;
-import java.util.Objects;
 import java.util.function.Function;
 import jp.gr.java_conf.saka.plantuml.viewer.service.shared.IPlantUmlSharedService;
 import net.sourceforge.plantuml.FileFormat;
@@ -45,11 +44,8 @@ public class PlantUmlSharedServiceImpl implements IPlantUmlSharedService {
   private InputStream generate(String plantUml, FileFormat format) throws IOException {
     LOGGER.info(plantUml);
     ByteArrayOutputStream os = new ByteArrayOutputStream();
-    String description = readerFactory.apply(plantUml).generateImage(
+    readerFactory.apply(plantUml).generateImage(
       os, new FileFormatOption(format));
-    if (Objects.isNull(description)) {
-      throw new IllegalArgumentException(plantUml);
-    }
     return new ByteArrayInputStream(os.toByteArray());
   }
 }
