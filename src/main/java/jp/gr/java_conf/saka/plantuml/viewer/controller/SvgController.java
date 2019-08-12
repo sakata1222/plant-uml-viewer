@@ -2,6 +2,7 @@ package jp.gr.java_conf.saka.plantuml.viewer.controller;
 
 import java.io.IOException;
 import java.net.URI;
+import jp.gr.java_conf.saka.plantuml.viewer.controller.common.CustomMediaTypes;
 import jp.gr.java_conf.saka.plantuml.viewer.controller.vo.UmlRequest;
 import jp.gr.java_conf.saka.plantuml.viewer.controller.vo.UmlResponse;
 import jp.gr.java_conf.saka.plantuml.viewer.service.IPlantUmlSvgService;
@@ -55,8 +56,12 @@ public class SvgController {
   }
 
   @GetMapping(value = "{id}/raw.svg")
-  public Resource rawData(@PathVariable("id") String id) {
-    return plantUmlService.findSvg(id).map(ByteArrayResource::new)
+  public ResponseEntity<Resource> rawData(@PathVariable("id") String id) {
+    return plantUmlService.findSvg(id).map(
+      bytes ->
+        ResponseEntity.ok()
+          .contentType(CustomMediaTypes.IMAGE_SVG_XML)
+          .<Resource>body(new ByteArrayResource(bytes)))
       .orElseThrow(() -> new IllegalArgumentException(id));
   }
 }
