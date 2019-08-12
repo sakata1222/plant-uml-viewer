@@ -40,14 +40,16 @@ public class SvgController {
       throw new IllegalArgumentException(result.getFieldError().toString());
     }
     String id = plantUmlService.createSvg(request.getPlantUml());
-    URI rawDataUri = urlBuilder.pathSegment("svg", id, "raw.svg").build().toUri();
+    String path = "svg/" + id + "/raw.svg";
+    URI rawDataUri = urlBuilder.path(path).build().toUri();
     return ResponseEntity
       .status(HttpStatus.CREATED)
       .body(
         UmlResponse.builder()
           .id(id)
           .plantUml(request.getPlantUml())
-          .rawDataUml(rawDataUri)
+          .rawDataPath(path)
+          .rawDataUrl(rawDataUri)
           .build()
       );
   }

@@ -16,5 +16,8 @@ public class UmlResponse {
   private String plantUml;
 
   @NotBlank
-  private URI rawDataUml;
+  private String rawDataPath;
+
+  @NotBlank
+  private URI rawDataUrl;
 }
