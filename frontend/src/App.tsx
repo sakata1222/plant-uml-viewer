@@ -1,24 +1,28 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState } from 'react';
 import './App.scss';
+import RendaringArea from "./RendaringArea";
 
 const App: React.FC = () => {
+  const [inputText, setInputText] = useState("");
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+      <header className="App-header has-background-warning">
+        <div className="title is-3 has-text-white-ter has-text-weight-bold">PlantUML Viewer</div>
       </header>
+      <div className="App-main">
+        <div className="input-area">
+          <textarea
+            className="box"
+            value={inputText}
+            placeholder="Bob -> Alice: Hello"
+            onChange={(event) => setInputText(event.target.value)}
+          />
+        </div>
+        <div className="rendring-area">
+          <RendaringArea plantUml={inputText}></RendaringArea>
+        </div>
+      </div>
     </div>
   );
 }

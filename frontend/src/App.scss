@@ -1,33 +1,41 @@
+@import 'bulma.scss';
+
 .App {
+  height: 100%;
   text-align: center;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
-  pointer-events: none;
-}
-
+$appHeaderHeight: 3.0rem;
 .App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+  box-sizing: border-box;
+  height: $appHeaderHeight;
+  margin: 0px;
+  padding: 0px;
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  align-items: center;
 }
 
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.App-main {
+  display: flex;
+  height: calc(100% - #{$appHeaderHeight});
+  .input-area {
+    flex: 3;
+    box-sizing: border-box;
+    height: 100%;
+    padding: 10px;
+      textarea {
+        box-sizing: border-box;
+        width: 100%;
+        height: 100%;
+        border: none;
+        resize: none;
+    }
   }
-  to {
-    transform: rotate(360deg);
+  .rendring-area {
+    flex: 7;
+    box-sizing: border-box;
+    height: 100%;
+    padding: 5px;
   }
 }
