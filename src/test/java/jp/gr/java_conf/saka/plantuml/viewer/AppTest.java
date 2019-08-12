@@ -3,6 +3,7 @@
  */
 package jp.gr.java_conf.saka.plantuml.viewer;
 
+import static org.hamcrest.CoreMatchers.allOf;
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
@@ -15,6 +16,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
@@ -28,17 +30,21 @@ public class AppTest {
   private MockMvc mvc;
 
   @Test
-  public void svgGenerate() throws Exception {
+  public void postSvg() throws Exception {
     ObjectMapper mapper = new ObjectMapper();
     mvc
       .perform(
-        post("/svg/generate")
+        post("/svg/")
           .contentType(MediaType.APPLICATION_JSON)
           .content(mapper.writeValueAsString(
             ImmutableMap.of(
               "plantUml", "@startuml\r\n@enduml"
             ))))
-      .andExpect(status().isOk())
-      .andExpect(content().string(containsString("svg")));
+      .andExpect(status().is(HttpStatus.CREATED.value()))
+      .andExpect(content().string(
+        allOf(
+          containsString("@startuml"),
+          containsString("/raw")))
+      );
   }
 }

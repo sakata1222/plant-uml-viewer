@@ -1,9 +1,9 @@
-package jp.gr.java_conf.saka.plantuml.viewer.service;
+package jp.gr.java_conf.saka.plantuml.viewer.service.shared;
 
 import java.io.IOException;
 import java.io.InputStream;
 
-public interface IPlantUmlService {
+public interface IPlantUmlSharedService {
 
   InputStream toSvg(String plantUml) throws IOException;
 

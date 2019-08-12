@@ -1,4 +1,4 @@
-package jp.gr.java_conf.saka.plantuml.viewer.service.impl;
+package jp.gr.java_conf.saka.plantuml.viewer.service.shared.impl;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -7,7 +7,7 @@ import java.io.InputStream;
 import java.lang.invoke.MethodHandles;
 import java.util.Objects;
 import java.util.function.Function;
-import jp.gr.java_conf.saka.plantuml.viewer.service.IPlantUmlService;
+import jp.gr.java_conf.saka.plantuml.viewer.service.shared.IPlantUmlSharedService;
 import net.sourceforge.plantuml.FileFormat;
 import net.sourceforge.plantuml.FileFormatOption;
 import net.sourceforge.plantuml.SourceStringReader;
@@ -16,18 +16,18 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 @Service
-public class PlantUmlServiceImpl implements IPlantUmlService {
+public class PlantUmlSharedServiceImpl implements IPlantUmlSharedService {
 
   private static final Logger LOGGER = LoggerFactory
     .getLogger(MethodHandles.lookup().lookupClass());
 
   private Function<String, SourceStringReader> readerFactory;
 
-  public PlantUmlServiceImpl() {
+  public PlantUmlSharedServiceImpl() {
     this(SourceStringReader::new);
   }
 
-  public PlantUmlServiceImpl(
+  public PlantUmlSharedServiceImpl(
     Function<String, SourceStringReader> readerFactory) {
     this.readerFactory = readerFactory;
   }
