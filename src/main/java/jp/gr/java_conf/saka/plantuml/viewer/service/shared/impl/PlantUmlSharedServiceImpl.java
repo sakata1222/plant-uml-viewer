@@ -10,25 +10,32 @@ import jp.gr.java_conf.saka.plantuml.viewer.service.shared.IPlantUmlSharedServic
 import net.sourceforge.plantuml.FileFormat;
 import net.sourceforge.plantuml.FileFormatOption;
 import net.sourceforge.plantuml.SourceStringReader;
+import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Service;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
-@Service
+@Component
 public class PlantUmlSharedServiceImpl implements IPlantUmlSharedService {
 
   private static final Logger LOGGER = LoggerFactory
     .getLogger(MethodHandles.lookup().lookupClass());
 
   private Function<String, SourceStringReader> readerFactory;
+  private PdfGenerator pdfGenerator;
 
-  public PlantUmlSharedServiceImpl() {
-    this(SourceStringReader::new);
+  @Autowired
+  public PlantUmlSharedServiceImpl(
+    PdfGenerator pdfGenerator) {
+    this(SourceStringReader::new, pdfGenerator);
   }
 
   public PlantUmlSharedServiceImpl(
-    Function<String, SourceStringReader> readerFactory) {
+    Function<String, SourceStringReader> readerFactory,
+    PdfGenerator pdfGenerator) {
     this.readerFactory = readerFactory;
+    this.pdfGenerator = pdfGenerator;
   }
 
   @Override
@@ -38,7 +45,12 @@ public class PlantUmlSharedServiceImpl implements IPlantUmlSharedService {
 
   @Override
   public InputStream toPdf(String plantUml) throws IOException {
-    return generate(plantUml, FileFormat.PDF);
+    InputStream png = toPng(plantUml);
+    return new ByteArrayInputStream(pdfGenerator.generateFromImage(IOUtils.toByteArray(png)));
+  }
+
+  private InputStream toPng(String plantUml) throws IOException {
+    return generate(plantUml, FileFormat.PNG);
   }
 
   private InputStream generate(String plantUml, FileFormat format) throws IOException {
