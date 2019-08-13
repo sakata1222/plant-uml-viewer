@@ -12,4 +12,6 @@ public class PlantUmlEntity {
   private String uml;
 
   private byte[] data;
+
+  private long lastUpdate;
 }
