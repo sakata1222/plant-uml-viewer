@@ -1,7 +1,8 @@
 .gradle
 /build/
 /out/
-/src/main/resources/static/**
+/src/main/resources/static/
+/docker_build/
 
 # Ignore Gradle GUI config
 gradle-app.setting

@@ -55,19 +55,17 @@ node {
   nodeModulesDir = frontendDir
 }
 
-task copyFrontend(type: Copy) {
-  from frontendDir.name + '/build'
-  into staticResource
-}
-
 task cleanFrontend(type: Delete) {
   delete staticResource
 }
 
+task copyFrontend(type: Copy) {
+  from frontendDir.name + '/build'
+  into staticResource
+}
 copyFrontend.dependsOn cleanFrontend
 
 task bundleFrontend
-
 bundleFrontend.dependsOn npm_run_build
 bundleFrontend.finalizedBy copyFrontend
 
@@ -75,10 +73,11 @@ bootJar {
   mainClassName = 'jp.gr.java_conf.saka.plantuml.viewer.App'
 }
 
-bootRun.dependsOn cleanFrontend
+task startApi
+startApi.dependsOn cleanFrontend
+startApi.finalizedBy bootRun
 
 task startApp
-
 startApp.dependsOn classes
 startApp.dependsOn bundleFrontend
 startApp.finalizedBy bootRun
