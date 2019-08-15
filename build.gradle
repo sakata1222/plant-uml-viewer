@@ -11,6 +11,7 @@ plugins {
   id "com.gradle.build-scan" version "2.4"
   id "org.springframework.boot" version "2.1.7.RELEASE"
   id "io.spring.dependency-management" version "1.0.8.RELEASE"
+  id "com.moowork.node" version "1.3.1"
 }
 
 repositories {
@@ -46,6 +47,38 @@ dependencies {
   testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
+def frontendDir = file('frontend')
+def resource = file('src/main/resources')
+def staticResource = new File(resource, 'static')
+
+node {
+  nodeModulesDir = frontendDir
+}
+
+task copyFrontend(type: Copy) {
+  from frontendDir.name + '/build'
+  into staticResource
+}
+
+task cleanFrontend(type: Delete) {
+  delete staticResource
+}
+
+copyFrontend.dependsOn cleanFrontend
+
+task bundleFrontend
+
+bundleFrontend.dependsOn npm_run_build
+bundleFrontend.finalizedBy copyFrontend
+
 bootJar {
   mainClassName = 'jp.gr.java_conf.saka.plantuml.viewer.App'
 }
+
+bootRun.dependsOn cleanFrontend
+
+task startApp
+
+startApp.dependsOn classes
+startApp.dependsOn bundleFrontend
+startApp.finalizedBy bootRun
