@@ -29,9 +29,7 @@ public class PlantUmlSvgService implements IPlantUmlSvgService {
   public String createSvg(String uml) throws IOException {
     try (InputStream svg = plantUmlSharedService.toSvg(uml)) {
       byte[] bytes = IOUtils.toByteArray(svg);
-      PlantUmlEntity entity = new PlantUmlEntity();
-      entity.setUml(uml);
-      entity.setData(bytes);
+      PlantUmlEntity entity = PlantUmlEntity.builder().uml(uml).data(bytes).build();
       return svgRepository.create(entity).getId();
     }
   }

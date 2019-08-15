@@ -2,16 +2,16 @@ package jp.gr.java_conf.saka.plantuml.viewer.repository.impl;
 
 import java.util.Map;
 import java.util.Optional;
-import jp.gr.java_conf.saka.plantuml.viewer.repository.IPlantUmlSvgRepository;
+import jp.gr.java_conf.saka.plantuml.viewer.repository.IPlantUmlPdfRepository;
 import jp.gr.java_conf.saka.plantuml.viewer.repository.entity.PlantUmlEntity;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class PlantUmlSvgRepositoryImpl implements IPlantUmlSvgRepository {
+public class PlantUmlPdfRepository implements IPlantUmlPdfRepository {
 
   private PlantUmlInMemoryRepository repository;
 
-  public PlantUmlSvgRepositoryImpl(
+  public PlantUmlPdfRepository(
     PlantUmlInMemoryRepository repository) {
     this.repository = repository;
   }
@@ -20,12 +20,6 @@ public class PlantUmlSvgRepositoryImpl implements IPlantUmlSvgRepository {
   public PlantUmlEntity create(
     PlantUmlEntity umlEntity) {
     return repository.create(umlEntity);
-  }
-
-  @Override
-  public PlantUmlEntity update(
-    PlantUmlEntity umlEntity) {
-    return repository.update(umlEntity);
   }
 
   @Override

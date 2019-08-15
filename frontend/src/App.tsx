@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './App.scss';
+import ExportButton from "./ExportButton";
 import RendaringArea from "./RendaringArea";
 
 const App: React.FC = () => {
@@ -19,8 +20,13 @@ const App: React.FC = () => {
             onChange={(event) => setInputText(event.target.value)}
           />
         </div>
-        <div className="rendring-area">
-          <RendaringArea plantUml={inputText}></RendaringArea>
+        <div className="display-area">
+          <div className="button-area">
+            <ExportButton plantUml={inputText} label="PDF" type="pdf"></ExportButton>
+          </div>
+          <div className="box preview-area">
+            <RendaringArea plantUml={inputText}></RendaringArea>
+          </div>
         </div>
       </div>
     </div>
