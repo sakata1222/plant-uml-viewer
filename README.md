@@ -11,3 +11,28 @@
 
 - Real time rendaring
 - PDF export
+
+## How to start
+
+### Production
+
+```shell
+./gradlew startApp
+```
+
+This task builds both Server and GUI, and bundle GUI into spring boot applicaiton.
+
+### for Developer
+
+- Server
+
+  ```shell
+  ./gradlew bootRun
+  ```
+
+- GUI
+
+  ```shell
+  cd frontend
+  npm start
+  ```

@@ -1,6 +1,7 @@
 .gradle
 /build/
 /out/
+/src/main/resources/static/**
 
 # Ignore Gradle GUI config
 gradle-app.setting
