@@ -1,13 +1,7 @@
-@import 'bulma.scss';
-
 html {
   height: 100%;
   margin:0;
-  overflow-y: hidden;
-}
-
-#root {
-  height: 100%;
+  overflow-y: hidden !important;
 }
 
 body {
@@ -18,6 +12,10 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+#root {
+  height: 100%;
 }
 
 code {

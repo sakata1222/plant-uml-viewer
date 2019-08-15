@@ -32,10 +32,20 @@ $appHeaderHeight: 3.0rem;
         resize: none;
     }
   }
-  .rendring-area {
+  .display-area {
     flex: 7;
     box-sizing: border-box;
     height: 100%;
     padding: 5px;
+    $buttonAreaHeight: 40px;
+    .button-area {
+      text-align: right;
+      height: $buttonAreaHeight;
+    }
+    .preview-area {
+      overflow: scroll;
+      height: calc(100% - #{$buttonAreaHeight});
+      max-height: calc(100% - #{$buttonAreaHeight});
+    }
   }
 }
