@@ -1,6 +1,6 @@
 # plant-uml-viewer
 
-![image](https://user-images.githubusercontent.com/6317652/62855627-b9ce6500-bd2d-11e9-8b19-d9a9f26becc6.png)
+![plantuml-viewer-demo](https://user-images.githubusercontent.com/6317652/63104410-ebf3f700-bfb9-11e9-8587-168aa5493d88.gif)
 
 ## Feature
 
